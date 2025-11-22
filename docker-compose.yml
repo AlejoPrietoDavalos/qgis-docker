@@ -1,0 +1,16 @@
+services:
+  qgis:
+    image: qgis/qgis:release-3_34
+    container_name: qgis
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - QT_QPA_PLATFORM=xcb
+      - QT_STYLE_OVERRIDE=Breeze-Dark
+    command: ["qgis"]
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${HOME}:${HOME}  # Monta tu HOME en la misma ruta dentro del contenedor para que los paths coincidan
+    devices:
+      - /dev/dri:/dev/dri
+    ipc: host
